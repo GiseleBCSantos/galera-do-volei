@@ -72,21 +72,66 @@ router_convites = APIRouter(prefix="/api/convites", tags=["Convites"])
 @router_jogadores.get("/", response_model=List[Jogador])
 def get_jogadores():
     return [
-        {"id": 1, "nome": "João", "email": "joao@email.com", "idade": 25, "sexo": "M"},
-        {"id": 2, "nome": "Maria", "email": "maria@email.com", "idade": 22, "sexo": "F"},
+        {"id": '1', "nome": "João", "email": "joao@email.com", "idade": 25, "sexo": "M"},
+        {"id": '2', "nome": "Maria", "email": "maria@email.com", "idade": 22, "sexo": "F"},
     ]
 
 @router_jogadores.get("/{id}", response_model=Jogador)
 def get_jogador(id: int):
-    return {"id": id, "nome": "João", "email": "joao@email.com", "idade": 25, "sexo": "M"}
+    return {"id": '1', "nome": "João", "email": "joao@email.com", "idade": 25, "sexo": "M"}
 
 @router_jogadores.post("/", response_model=Jogador, status_code=201)
-def create_jogador(jogador: Jogador):
-    return jogador
+def create_jogador(jogador: JogadorCreate):
+    novo_jogador = Jogador(
+        id=str(uuid4()),  
+        nome=jogador.nome,
+        email=jogador.email,
+        idade=jogador.idade,
+        sexo=jogador.sexo,
+        convidador_id=None
+    )
+    return novo_jogador
+
+@router_jogadores.post("/convite/{codigo_convite}", response_model=Jogador, status_code=201)
+def create_jogador_via_convite(codigo_convite: str, dados: JogadorCreate):
+    convite = codigo_convite  # Buscar convite no banco pelo código
+    convidador_id = "1"  # Id do convidador que normalmente viria no convite
+    usado = False  # Status que normalmente viria no convite
+
+    if not convite:
+        raise HTTPException(status_code=400, detail="Convite inválido.")
+
+    if usado:
+        raise HTTPException(status_code=400, detail="Convite já utilizado.")
+
+    novo_jogador = Jogador(
+        id=str(uuid4()),  
+        nome=dados.nome,
+        email=dados.email,
+        idade=dados.idade,
+        sexo=dados.sexo,
+        convidador_id=convidador_id
+    )
+
+    usado = True # Marcar convite como usado 
+    # convite.save() # Salvar convite no banco
+
+    return novo_jogador
 
 @router_jogadores.put("/{id}", response_model=Jogador)
-def update_jogador(id: int, jogador: Jogador):
-    return jogador
+def update_jogador(id: int, jogador: JogadorCreate):
+
+    novo_jogador = Jogador(
+        id=str(id),
+        nome=jogador.nome,
+        email=jogador.email,
+        idade=jogador.idade,
+        sexo=jogador.sexo
+    )
+    
+    # novo_jogador.save()  
+    
+    return novo_jogador
 
 @router_jogadores.delete("/{id}", status_code=204)
 def delete_jogador(id: int):
