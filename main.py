@@ -66,6 +66,8 @@ class Convite(BaseModel):
 router_jogadores = APIRouter(prefix="/api/jogadores", tags=["Jogadores"])
 router_times = APIRouter(prefix="/api/times", tags=["Times"])
 router_partidas = APIRouter(prefix="/api/partidas", tags=["Partidas"])
+router_convites = APIRouter(prefix="/api/convites", tags=["Convites"])
+
 
 @router_jogadores.get("/", response_model=List[Jogador])
 def get_jogadores():
@@ -195,6 +197,29 @@ def get_jogadores_da_partida(id: int):
         {"id": 2, "nome": "Maria", "email": "maria@email.com", "idade": 22, "sexo": "F"},
     ]
 
+@router_convites.get("/", response_model=List[Convite])
+def get_convites():
+    return [
+        {
+            "id": 1,
+            "convidador_id": 1,
+            "email_convidado": "lucas@email.com",
+            "data_convite": datetime(2025, 9, 15, 10, 0, 0)
+        },
+        {
+            "id": 2,
+            "convidador_id": 2,
+            "email_convidado": "ana@email.com",
+            "data_convite": datetime(2025, 9, 16, 14, 30, 0)
+        }
+    ]
+
+@router_convites.post("/", response_model=Convite, status_code=201)
+def create_convite(convite: Convite):
+    return convite
+
+
 app.include_router(router_jogadores)
 app.include_router(router_times)
 app.include_router(router_partidas)
+app.include_router(router_convites)
