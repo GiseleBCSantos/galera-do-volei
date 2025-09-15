@@ -251,6 +251,36 @@ def get_jogadores_da_partida(id: int):
         {"id": 2, "nome": "Maria", "email": "maria@email.com", "idade": 22, "sexo": "F"},
     ]
 
+@router_partidas.post("/{id}/iniciar", response_model=Partida)
+def iniciar_partida(id: int):
+    partida = get_partida(id)  # Buscar partida no banco pelo id
+
+    partida = {
+        "id": id,
+        "timeAnfitriao": partida.timeAnfitriao,
+        "timeConvidado": partida.timeConvidado,
+        "categoria": partida.categoria,
+        "data": partida.data,
+        "local": partida.local,
+        "status": "Em Andamento",  
+    }
+    return partida
+
+@router_partidas.post("/{id}/finalizar", response_model=Partida)
+def finalizar_partida(id: int):
+    partida = get_partida(id)  # Buscar partida no banco pelo id
+
+    partida = {
+        "id": id,
+        "timeAnfitriao": partida.timeAnfitriao,
+        "timeConvidado": partida.timeConvidado,
+        "categoria": partida.categoria,
+        "data": partida.data,
+        "local": partida.local,
+        "status": "Encerrada",
+    }
+    return partida
+
 @router_convites.get("/", response_model=List[Convite])
 def get_convites():
     return [
