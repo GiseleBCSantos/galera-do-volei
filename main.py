@@ -140,20 +140,30 @@ def delete_jogador(id: int):
 @router_times.get("/", response_model=List[Time])
 def get_times():
     return [
-        {"id": 1, "nome": "Time A", "categoria": "Masculino"},
-        {"id": 2, "nome": "Time B", "categoria": "Feminino"},
+        {"id": '1', "nome": "Time A", "categoria": "Masculino"},
+        {"id": '2', "nome": "Time B", "categoria": "Feminino"},
     ]
 
 @router_times.get("/{id}", response_model=Time)
 def get_time(id: int):
-    return {"id": id, "nome": "Time A", "categoria": "Masculino"}
+    return {"id": str(id), "nome": "Time A", "categoria": "Masculino"}
 
 @router_times.post("/", response_model=Time, status_code=201)
-def create_time(time: Time):
-    return time
+def create_time(time: TimeCreate):
+    novo_time = Time(
+        id=str(uuid4()),
+        nome=time.nome,
+        categoria=time.categoria
+    )
+    return novo_time
 
 @router_times.put("/{id}", response_model=Time)
-def update_time(id: int, time: Time):
+def update_time(id: int, time: TimeCreate):
+    time = Time(
+        id=str(id),
+        nome=time.nome,
+        categoria=time.categoria
+    )
     return time
 
 @router_times.delete("/{id}", status_code=204)
@@ -163,8 +173,8 @@ def delete_time(id: int):
 @router_times.get("/{id}/jogadores", response_model=List[Jogador])
 def get_jogadores_do_time(id: int):
     return [
-        {"id": 1, "nome": "João", "email": "joao@email.com", "idade": 25, "sexo": "M"},
-        {"id": 3, "nome": "Lucas", "email": "lucas@email.com", "idade": 27, "sexo": "M"},
+        {"id": '1', "nome": "João", "email": "joao@email.com", "idade": 25, "sexo": "M"},
+        {"id": '3', "nome": "Lucas", "email": "lucas@email.com", "idade": 27, "sexo": "M"},
     ]
 
 @router_times.get("/{id}/partidas", response_model=List[Partida])
@@ -177,7 +187,7 @@ def get_partidas_do_time(id: int):
             "categoria": "Masculino",
             "data": "2025-10-01",
             "local": "Ginásio Central",
-            "status": "Agendada",
+            "status": "Nova",  
         },
         {
             "id": 2,
@@ -186,10 +196,9 @@ def get_partidas_do_time(id: int):
             "categoria": "Masculino",
             "data": "2025-11-01",
             "local": "Ginásio Secundário",
-            "status": "Concluída",
+            "status": "Encerrada", 
         }
     ]
-
 @router_partidas.get("/", response_model=List[Partida])
 def get_partidas():
     return [
