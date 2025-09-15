@@ -11,6 +11,8 @@
 
 - Retorna todos os jogadores cadastrados.
 
+![alt text](<Captura de tela 2025-09-15 094214.png>)
+
 **Response**  
 Status Code: `200`
 
@@ -30,6 +32,8 @@ Status Code: `200`
 
 - Retorna os dados de um jogador específico.
 
+![alt text](image.png)
+
 **Response**  
 Status Code: `200`
 
@@ -46,6 +50,8 @@ Status Code: `200`
 ### `POST` (api/jogadores)
 
 - Cadastra um novo jogador.
+
+![alt text](image-1.png)
 
 **Request**
 
@@ -71,9 +77,42 @@ Status Code: `201`
 }
 ```
 
+### `POST` (api/jogadores/convite/{codigo_convite})
+
+- Cadastra um novo jogador utilizando um código de convite válido.
+
+![alt text](image-2.png)
+
+**Request**
+
+```json
+{
+  "nome": "",
+  "email": "",
+  "idade": 0,
+  "sexo": ""
+}
+```
+
+**Response**  
+Status Code: `201`
+
+```json
+{
+  "id": "string",
+  "nome": "",
+  "email": "",
+  "idade": 0,
+  "sexo": "",
+  "convidador_id": "string"
+}
+```
+
 ### `PUT` (api/jogadores/{id})
 
 - Atualiza os dados de um jogador existente.
+
+![alt text](image-3.png)
 
 **Request**
 
@@ -103,6 +142,8 @@ Status Code: `200`
 
 - Remove um jogador do sistema.
 
+![alt text](image-4.png)
+
 **Response**  
 Status Code: `204 No Content`
 
@@ -116,6 +157,8 @@ Status Code: `204 No Content`
 ### `GET` (api/times)
 
 - Retorna todos os times cadastrados.
+
+![alt text](image-5.png)
 
 **Response**  
 Status Code: `200`
@@ -134,6 +177,8 @@ Status Code: `200`
 
 - Retorna os dados de um time específico.
 
+![alt text](image-6.png)
+
 **Response**  
 Status Code: `200`
 
@@ -148,6 +193,8 @@ Status Code: `200`
 ### `POST` (api/times)
 
 - Cadastra um novo time.
+
+![alt text](image-7.png)
 
 **Request**
 
@@ -173,6 +220,8 @@ Status Code: `201`
 
 - Atualiza os dados de um time existente.
 
+![alt text](image-8.png)
+
 **Request**
 
 ```json
@@ -197,12 +246,16 @@ Status Code: `200`
 
 - Remove um time do sistema.
 
+![alt text](image-9.png)
+
 **Response**  
 Status Code: `204 No Content`
 
 ### `GET` (api/times/{id}/jogadores)
 
 - Retorna todos os jogadores associados a um time específico.
+
+![alt text](image-10.png)
 
 **Response**  
 Status Code: `200`
@@ -229,6 +282,8 @@ Status Code: `200`
 ### `GET` (api/times/{id}/partidas)
 
 - Retorna todas as partidas em que um time específico participou.
+
+![alt text](image-11.png)
 
 **Response**  
 Status Code: `200`
@@ -415,4 +470,86 @@ Status Code: `200`
     "sexo": ""
   }
 ]
+```
+
+### `POST` (api/partidas/{id}/iniciar)
+
+- Inicia uma partida específica, alterando seu status para "Em Andamento".
+
+**Response**
+Status Code: `200`
+
+```json
+{
+  "id": "id",
+  "timeAnfitriao": "",
+  "timeConvidado": "",
+  "categoria": "",
+  "data": "",
+  "local": "",
+  "status": "Em Andamento"
+}
+```
+
+### `POST` (api/partidas/{id}/finalizar)
+
+- Finaliza uma partida específica, alterando seu status para "Encerrada".
+
+**Response**
+Status Code: `200`
+
+```json
+{
+  "id": "id",
+  "timeAnfitriao": "",
+  "timeConvidado": "",
+  "categoria": "",
+  "data": "",
+  "local": "",
+  "status": "Encerrada"
+}
+```
+
+## Convites
+
+- Código do convite
+- Convidador
+- Usado
+
+### `POST` (api/convites)
+
+- Cria um novo convite para um jogador.
+
+**Request**
+
+```json
+{
+  "convidador_id": "string"
+}
+```
+
+**Response**  
+Status Code: `201`
+
+```json
+{
+  "codigo": "string",
+  "convidador_id": "string",
+  "usado": false
+}
+```
+
+### `GET` (api/convites/{codigo})
+
+Consulta um convite pelo código.
+
+**Response**  
+Status Code: `200`
+
+```json
+{
+  "codigo": "string",
+  "convidador_id": "string",
+  "usado": false
+}
 ```
