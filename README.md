@@ -11,7 +11,7 @@
 
 - Retorna todos os jogadores cadastrados.
 
-![alt text](<Captura de tela 2025-09-15 094214.png>)
+![alt text](<img/Captura de tela 2025-09-15 094214.png>)
 
 **Response**  
 Status Code: `200`
@@ -32,7 +32,7 @@ Status Code: `200`
 
 - Retorna os dados de um jogador específico.
 
-![alt text](image.png)
+![alt text](img/image.png)
 
 **Response**  
 Status Code: `200`
@@ -51,7 +51,7 @@ Status Code: `200`
 
 - Cadastra um novo jogador.
 
-![alt text](image-1.png)
+![alt text](img/image-1.png)
 
 **Request**
 
@@ -81,7 +81,7 @@ Status Code: `201`
 
 - Cadastra um novo jogador utilizando um código de convite válido.
 
-![alt text](image-2.png)
+![alt text](img/image-2.png)
 
 **Request**
 
@@ -112,7 +112,7 @@ Status Code: `201`
 
 - Atualiza os dados de um jogador existente.
 
-![alt text](image-3.png)
+![alt text](img/image-3.png)
 
 **Request**
 
@@ -142,7 +142,7 @@ Status Code: `200`
 
 - Remove um jogador do sistema.
 
-![alt text](image-4.png)
+![alt text](img/image-4.png)
 
 **Response**  
 Status Code: `204 No Content`
@@ -158,7 +158,7 @@ Status Code: `204 No Content`
 
 - Retorna todos os times cadastrados.
 
-![alt text](image-5.png)
+![alt text](img/image-5.png)
 
 **Response**  
 Status Code: `200`
@@ -177,7 +177,7 @@ Status Code: `200`
 
 - Retorna os dados de um time específico.
 
-![alt text](image-6.png)
+![alt text](img/image-6.png)
 
 **Response**  
 Status Code: `200`
@@ -194,7 +194,7 @@ Status Code: `200`
 
 - Cadastra um novo time.
 
-![alt text](image-7.png)
+![alt text](img/image-7.png)
 
 **Request**
 
@@ -220,7 +220,7 @@ Status Code: `201`
 
 - Atualiza os dados de um time existente.
 
-![alt text](image-8.png)
+![alt text](img/image-8.png)
 
 **Request**
 
@@ -246,7 +246,7 @@ Status Code: `200`
 
 - Remove um time do sistema.
 
-![alt text](image-9.png)
+![alt text](img/image-9.png)
 
 **Response**  
 Status Code: `204 No Content`
@@ -255,7 +255,7 @@ Status Code: `204 No Content`
 
 - Retorna todos os jogadores associados a um time específico.
 
-![alt text](image-10.png)
+![alt text](img/image-10.png)
 
 **Response**  
 Status Code: `200`
