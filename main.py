@@ -1,4 +1,6 @@
-from fastapi import FastAPI, APIRouter
+from  datetime import datetime
+from uuid import uuid4
+from fastapi import FastAPI, APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
 from enum import Enum
@@ -6,7 +8,7 @@ from enum import Enum
 app = FastAPI(
     title="API Galera do Volei",
     description="API para gerenciamento de jogadores, times e partidas de vôlei.",
-    version="1.0.0"
+    version="1.0.1"
 )
 
 class SexoEnum(str, Enum):
