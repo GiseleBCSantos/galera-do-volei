@@ -24,14 +24,25 @@ class StatusPartidaEnum(str, Enum):
     Encerrada = "Encerrada"
 
 class Jogador(BaseModel):
-    id: int
+    id: str
+    nome: str
+    email: str
+    idade: int
+    sexo: SexoEnum
+    convidador_id: int | None = None
+
+class JogadorCreate(BaseModel):
     nome: str
     email: str
     idade: int
     sexo: SexoEnum
 
 class Time(BaseModel):
-    id: int
+    id: str
+    nome: str
+    categoria: CategoriaTimeEnum
+
+class TimeCreate(BaseModel):
     nome: str
     categoria: CategoriaTimeEnum
 
@@ -43,6 +54,14 @@ class Partida(BaseModel):
     data: str
     local: str
     status: StatusPartidaEnum
+    
+class Convite(BaseModel):
+    id: int
+    convidador_id: int
+    email_convidado: str
+    data_convite: datetime
+    usado: bool = False
+    
 
 router_jogadores = APIRouter(prefix="/api/jogadores", tags=["Jogadores"])
 router_times = APIRouter(prefix="/api/times", tags=["Times"])
